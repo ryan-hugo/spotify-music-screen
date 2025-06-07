@@ -12,27 +12,30 @@
   </head>
   <body>
     <div class="music-container">
-      <p id="playlist-item">Nome Playlist</p>
+      <p id="playlist-name">Nome Playlist</p>
       <img id="img" src="./capa2.jpg" alt="" />
+      <audio id="audio" src="songs/chinokate.mp3"></audio>
       <div class="song-container">
         <div class="song-details">
           <h5 id="music-name">Nome da Música</h5>
           <p id="band-name">Nome da banda</p>
         </div>
-        <div id="like" class="button">
+        <button id="like" class="button button-like">
           <i class="bi bi-heart"></i>
-        </div>
+        </button>
       </div>
       <div id="song-bar">
         <div id="current-progress"></div>
       </div>
       <div id="navigation-buttons">
-        <div id="shuffle" class="button"><i class="bi bi-shuffle"></i></div>
-        <div id="back" class="button button-navigate"><i class="bi bi-skip-start"></i></div>
-        <div id="play" class="button button-biggest"><i class="bi bi-play-circle-fill"></i></div>
-        <div id="advance" class="button button-navigate"><i class="bi bi-skip-end"></i></div>
-        <div id="repeat" class="button"><i class="bi bi-arrow-repeat"></i></div>
+        <button id="shuffle" class="button"><i class="bi bi-shuffle"></i></button>
+        <button id="back" class="button button-navigate"><i class="bi bi-skip-start-fill"></i></button>
+        <button id="play" class="button button-biggest"><i class="bi bi-play-circle-fill"></i></button>
+        <button id="advance" class="button button-navigate"><i class="bi bi-skip-end-fill"></i></button>
+        <button id="repeat" class="button"><i class="bi bi-arrow-repeat"></i></button>
       </div>
     </div>
   </body>
+
+  <script src="./scripts.js"></script>
 </html>
