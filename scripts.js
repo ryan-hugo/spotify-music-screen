@@ -2,6 +2,10 @@ const song_name = document.getElementById("music-name");
 const band_name = document.getElementById("band-name");
 const playlist_name = document.getElementById("playlist-name");
 const play = document.getElementById("play");
+const currentTimeElement = document.getElementById("current-time");
+const durationElement = document.getElementById("duration");
+
+const progressBar_container = document.getElementById("progressBar-container");
 
 const bodyElement = document.body;
 let index = 0;
@@ -9,37 +13,39 @@ let index = 0;
 const audio = document.getElementById("audio");
 const imgCover = document.getElementById("img");
 
+const likeIcon = document.getElementById("like");
+
 const previousButton = document.getElementById("back");
 const nextButton = document.getElementById("advance");
+const shuffleButton = document.getElementById("shuffle");
 
 const left_right_confusion = {
   song_name: "Left Right Confusion",
   band_name: "Yorushika",
   file: "left-right-confusion",
-  background: "linear-gradient(to right,rgb(159, 168, 246),rgb(29, 19, 112))",
+  background: "linear-gradient(to right,rgb(188, 192, 221),rgb(51, 22, 65))",
+  isLiked: false,
 };
 
 const chinokate = {
   song_name: "Chinokate",
   band_name: "Yorushika",
   file: "Chinokate",
-  background: "linear-gradient(to right,rgb(245, 200, 123),rgb(143, 99, 10))",
+  background: "linear-gradient(to right,rgb(245, 210, 150),rgb(68, 50, 13))",
+  isLiked: false,
+};
 
-};S
 const howl_at_the_moon = {
   song_name: "Howl at the Moon",
   band_name: "Yorushika",
   file: "howl-at-the-moon",
-  background: "linear-gradient(to right,rgb(37, 22, 81),rgb(69, 68, 4))",
-
+  background: "linear-gradient(to right,rgb(240, 240, 167),rgb(34, 21, 66))",
+  isLiked: false,
 };
 
 const playlist = [left_right_confusion, chinokate, howl_at_the_moon];
 
 let isPlaying = false;
-
-// audio.pause();
-
 
 function playSong() {
   play.querySelector(".bi").classList.remove("bi-play-circle-fill");
@@ -66,9 +72,12 @@ function loadSong() {
   song_name.innerText = playlist[index].song_name;
   band_name.innerText = playlist[index].band_name;
   bodyElement.style.background = playlist[index].background;
+  likeIcon.classList.toggle("bi-heart-fill", playlist[index].isLiked);
+  likeIcon.classList.toggle("bi-heart", !playlist[index].isLiked);
   audio.src = `songs/${playlist[index].file}.mp3`;
   imgCover.src = `images/${playlist[index].file}.JPG`;
 }
+
 
 function nextSong() {
   if (index === 2) {
@@ -76,10 +85,12 @@ function nextSong() {
   } else {
     index += 1;
   }
-  audio.currentTime = 0; // Reset the song to the beginning
+  audio.currentTime = 0;
   loadSong();
   playSong();
+
 }
+
 function previousSong() {
   if (index === 0) {
     index = playlist.length - 1;
@@ -96,7 +107,7 @@ function formatTime(seconds) {
   const secs = Math.floor(seconds % 60);
   const time = `${minutes}:${secs < 10 ? "0" + secs : secs}`;
   if (isNaN(seconds)) {
-    return "0:00"; 
+    return "0:00";
   }
   return time;
 }
@@ -107,17 +118,51 @@ function updateSongBar() {
   const progress = (currentTime / duration) * 100;
   const songBar = document.getElementById("current-progress");
   songBar.style.width = `${progress}%`;
-  const currentTimeElement = document.getElementById("current-time");
-  const durationElement = document.getElementById("duration"); 
-  console.log(currentTime, duration);
+  // console.log(currentTime, duration)
   currentTimeElement.innerText = formatTime(currentTime);
   durationElement.innerText = formatTime(duration);
+  if (currentTime >= duration) {
+    nextSong();
+  }
 }
 
-loadSong()
+function updateProgressBar(event) {
+  const progressBar = event.target;
+  const progressBarWidth = progressBar.clientWidth;
+  const clickX = event.offsetX;
+  const duration = audio.duration;
+  const newTime = (clickX / progressBarWidth) * duration;
+  audio.currentTime = newTime;
+}
+
+function shufflePlaylist() {
+  index = Math.floor(Math.random() * playlist.length);
+  audio.currentTime = 0; // Reset the song to the beginning
+  loadSong();
+  playSong();
+}
+
+
+function likeOrDislike() {
+  if (playlist[index].isLiked) { 
+    playlist[index].isLiked = false;
+    likeIcon.classList.remove("bi-heart-fill");
+    likeIcon.classList.add("bi-heart");
+  } else {
+    playlist[index].isLiked = true;
+    likeIcon.classList.remove("bi-heart");
+    likeIcon.classList.add("bi-heart-fill");
+  }
+  console.log(playlist);
+}
+
+
+loadSong();
 
 play.addEventListener("click", checkPlayButton);
 nextButton.addEventListener("click", nextSong);
 previousButton.addEventListener("click", previousSong);
 audio.addEventListener("timeupdate", updateSongBar);
-
+progressBar_container.addEventListener("click", updateProgressBar);
+shuffleButton.addEventListener("click", shufflePlaylist);
+likeIcon.addEventListener("click", likeOrDislike);

@@ -13,7 +13,7 @@
   <body>
     <div class="music-container">
       <p id="playlist-name">Yorushika</p>
-      <img id="img"  alt="" />
+      <img id="img" alt="" />
       <audio id="audio"></audio>
       <div class="song-container">
         <div class="song-details">
@@ -21,21 +21,33 @@
           <p id="band-name"></p>
         </div>
         <button id="like" class="button button-like">
-          <i class="bi bi-heart"></i>
         </button>
       </div>
-      <div id="song-bar">
-        <div id="current-progress"></div>
-        <div id="song-duration">
-          <span id="current-time">0:00</span>
-          <span id="duration">0:00</span>
+      <div id="progressBar-container">
+        <div id="song-bar">
+          <div id="current-progress"></div>
+          <div id="song-duration">
+            <span id="current-time">0:00</span>
+            <span id="duration">0:00</span>
+          </div>
+        </div>
       </div>
       <div id="navigation-buttons">
-        <button id="shuffle" class="button"><i class="bi bi-shuffle"></i></button>
-        <button id="back" class="button button-navigate"><i class="bi bi-skip-start-fill"></i></button>
-        <button id="play" class="button button-biggest"><i class="bi bi-play-circle-fill"></i></button>
-        <button id="advance" class="button button-navigate"><i class="bi bi-skip-end-fill"></i></button>
-        <button id="repeat" class="button"><i class="bi bi-arrow-repeat"></i></button>
+        <button id="shuffle" class="button">
+          <i class="bi bi-shuffle"></i>
+        </button>
+        <button id="back" class="button button-navigate">
+          <i class="bi bi-skip-start-fill"></i>
+        </button>
+        <button id="play" class="button button-biggest">
+          <i class="bi bi-play-circle-fill"></i>
+        </button>
+        <button id="advance" class="button button-navigate">
+          <i class="bi bi-skip-end-fill"></i>
+        </button>
+        <button id="repeat" class="button">
+          <i class="bi bi-arrow-repeat"></i>
+        </button>
       </div>
     </div>
   </body>

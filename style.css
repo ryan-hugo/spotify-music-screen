@@ -23,10 +23,22 @@ button{
     font-weight: bold;
 }
 
+#progressBar-container{
+    padding-bottom: 1em;
+    cursor: pointer;
+}
+
+#dot-song{
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    
+}
+
 #song-bar{
     background-color: rgb(181, 181, 181);
     height: 3px;
-    margin-bottom: 1em;
     border-radius: 5px;
 }
 
@@ -50,13 +62,14 @@ button{
 
 #img{
     width: 400px;
+    border-radius: 10px;
 }
 
 .song-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1em 0em 0.5em 0em;
+    margin: 2.5em 0em 0.5em 0em;
 }
 
 
@@ -105,6 +118,11 @@ button{
 }
 
 .button-like:hover{
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
+#shuffle:hover{
     transform: scale(1.2);
     transition: 0.2s;
 }
