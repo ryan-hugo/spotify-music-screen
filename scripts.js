@@ -135,11 +135,19 @@ function updateProgressBar(event) {
   audio.currentTime = newTime;
 }
 
+let isShuffled = false;
+
 function shufflePlaylist() {
-  index = Math.floor(Math.random() * playlist.length);
-  audio.currentTime = 0; // Reset the song to the beginning
-  loadSong();
-  playSong();
+  if (!isShuffled) { 
+    playlist.sort(() => Math.random() - 0.5); // Shuffle the playlist randomly
+    shuffleButton.classList.add("button-active"); // Add active class to the shuffle button
+    isShuffled = true; // Set the shuffle state to true
+  } else {
+    playlist.sort((a, b) => a.song_name.localeCompare(b.song_name)); // Sort back to original order
+    shuffleButton.classList.remove("button-active"); // Remove active class from the shuffle button
+    isShuffled = false;// Set the shuffle state to false
+  }
+  index = 0; // Reset index after shuffling
 }
 
 
