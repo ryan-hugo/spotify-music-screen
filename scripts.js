@@ -18,6 +18,7 @@ const likeIcon = document.getElementById("like");
 const previousButton = document.getElementById("back");
 const nextButton = document.getElementById("advance");
 const shuffleButton = document.getElementById("shuffle");
+const repeatButton = document.getElementById("repeat");
 
 const left_right_confusion = {
   song_name: "Left Right Confusion",
@@ -78,7 +79,6 @@ function loadSong() {
   imgCover.src = `images/${playlist[index].file}.JPG`;
 }
 
-
 function nextSong() {
   if (index === 2) {
     index = 0;
@@ -88,7 +88,6 @@ function nextSong() {
   audio.currentTime = 0;
   loadSong();
   playSong();
-
 }
 
 function previousSong() {
@@ -138,21 +137,20 @@ function updateProgressBar(event) {
 let isShuffled = false;
 
 function shufflePlaylist() {
-  if (!isShuffled) { 
+  if (!isShuffled) {
     playlist.sort(() => Math.random() - 0.5); // Shuffle the playlist randomly
     shuffleButton.classList.add("button-active"); // Add active class to the shuffle button
     isShuffled = true; // Set the shuffle state to true
   } else {
     playlist.sort((a, b) => a.song_name.localeCompare(b.song_name)); // Sort back to original order
     shuffleButton.classList.remove("button-active"); // Remove active class from the shuffle button
-    isShuffled = false;// Set the shuffle state to false
+    isShuffled = false; // Set the shuffle state to false
   }
   index = 0; // Reset index after shuffling
 }
 
-
 function likeOrDislike() {
-  if (playlist[index].isLiked) { 
+  if (playlist[index].isLiked) {
     playlist[index].isLiked = false;
     likeIcon.classList.remove("bi-heart-fill");
     likeIcon.classList.add("bi-heart");
@@ -164,6 +162,25 @@ function likeOrDislike() {
   console.log(playlist);
 }
 
+function repeatSong() {
+  repeatButton.classList.toggle("button-active"); // Toggle the active state of the repeat button
+    if (repeatButton.classList.contains("button-active")) {
+      audio.loop = true; // Enable looping
+      if (isPlaying) {
+        if (audio.ended) {
+          audio.currentTime = 0; // Reset the song to the beginning
+          playSong(); // Play the song if it was paused
+        }
+      }
+      else {
+        audio.loop = false; // Disable looping if the song is paused
+      }
+    }
+    else {
+        audio.loop = false; // Disable looping
+    }
+
+}
 
 loadSong();
 
@@ -174,3 +191,4 @@ audio.addEventListener("timeupdate", updateSongBar);
 progressBar_container.addEventListener("click", updateProgressBar);
 shuffleButton.addEventListener("click", shufflePlaylist);
 likeIcon.addEventListener("click", likeOrDislike);
+repeatButton.addEventListener("click", repeatSong);
