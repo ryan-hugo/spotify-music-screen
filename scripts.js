@@ -126,12 +126,12 @@ function updateSongBar() {
 }
 
 function updateProgressBar(event) {
-  const progressBar = event.target;
-  const progressBarWidth = progressBar.clientWidth;
-  const clickX = event.offsetX;
-  const duration = audio.duration;
-  const newTime = (clickX / progressBarWidth) * duration;
-  audio.currentTime = newTime;
+  const progressBar = event.target; //
+  const progressBarWidth = progressBar.clientWidth; // Get the width of the progress bar
+  const clickX = event.offsetX; // Get the X coordinate of the click relative to the progress bar
+  const duration = audio.duration; // Get the total duration of the audio
+  const newTime = (clickX / progressBarWidth) * duration; // Calculate the new time based on the click position
+  audio.currentTime = newTime; // Set the audio's current time to the new time
 }
 
 let isShuffled = false;
@@ -150,8 +150,12 @@ function shufflePlaylist() {
 }
 
 function likeOrDislike() {
+
+  likeIcon.classList.toggle("bi-heart-fill", !playlist[index].isLiked);
+  likeIcon.classList.toggle("bi-heart", playlist[index].isLiked);
   if (playlist[index].isLiked) {
     playlist[index].isLiked = false;
+    likeIcon.style.color = ""; // Reset color to default
     likeIcon.classList.remove("bi-heart-fill");
     likeIcon.classList.add("bi-heart");
   } else {
@@ -159,7 +163,6 @@ function likeOrDislike() {
     likeIcon.classList.remove("bi-heart");
     likeIcon.classList.add("bi-heart-fill");
   }
-  console.log(playlist);
 }
 
 function repeatSong() {

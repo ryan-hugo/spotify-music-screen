@@ -128,6 +128,18 @@ button{
 }
 
 
+#repeat:hover{
+    transform: scale(1.2);
+    transition: 0.2s;
+}       
+
 .button-active {
     color: rgb(20, 199, 4);
+}
+
+.bi-heart-fill {
+    color: rgb(20, 199, 4);
+}
+.bi-heart {
+    color: white;
 }
