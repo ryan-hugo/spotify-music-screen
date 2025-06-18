@@ -150,7 +150,6 @@ function shufflePlaylist() {
 }
 
 function likeOrDislike() {
-
   likeIcon.classList.toggle("bi-heart-fill", !playlist[index].isLiked);
   likeIcon.classList.toggle("bi-heart", playlist[index].isLiked);
   if (playlist[index].isLiked) {
@@ -167,22 +166,19 @@ function likeOrDislike() {
 
 function repeatSong() {
   repeatButton.classList.toggle("button-active"); // Toggle the active state of the repeat button
-    if (repeatButton.classList.contains("button-active")) {
-      audio.loop = true; // Enable looping
-      if (isPlaying) {
-        if (audio.ended) {
-          audio.currentTime = 0; // Reset the song to the beginning
-          playSong(); // Play the song if it was paused
-        }
-      }
-      else {
-        audio.loop = false; // Disable looping if the song is paused
+  if (repeatButton.classList.contains("button-active")) {
+    audio.loop = true; // Enable looping
+    if (isPlaying) {
+      if (audio.ended) {
+        audio.currentTime = 0; // Reset the song to the beginning
+        playSong(); // Play the song if it was paused
+      } else {
+        playSong(); // Disable looping if the song is paused
       }
     }
-    else {
-        audio.loop = false; // Disable looping
-    }
-
+  } else {
+    audio.loop = false; // Disable looping
+  }
 }
 
 loadSong();
