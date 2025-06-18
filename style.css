@@ -28,6 +28,7 @@ button{
     cursor: pointer;
 }
 
+
 #dot-song{
     width: 10px;
     height: 10px;
@@ -42,12 +43,14 @@ button{
     border-radius: 5px;
 }
 
+
 #current-progress{
     background-color: #ffffff;
     height: inherit;
     margin-bottom: 0.5em;
     border-radius: 5px;
 }
+
 
 #song-duration{
     display: flex;
